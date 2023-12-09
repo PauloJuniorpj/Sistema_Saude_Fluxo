@@ -35,5 +35,17 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             _bancoContext.SaveChanges();
             return model;
         }
+
+        public async Task<ConsultaModel> AlterarConsulta(int id, ConsultaMedicaAtualizarDto consultaMedicaAtualizar)
+        {
+            var consultaAtualizada = await ConsultaMedicasById(id);
+            
+            if(consultaAtualizada == null)  {
+                throw new System.Exception("Houve um erro na atualozação da consulta!");
+            }
+            _bancoContext.ConsultasMedicas.Update(consultaAtualizada);
+            await _bancoContext.SaveChangesAsync();
+            return consultaAtualizada;
+        }
     }
 }

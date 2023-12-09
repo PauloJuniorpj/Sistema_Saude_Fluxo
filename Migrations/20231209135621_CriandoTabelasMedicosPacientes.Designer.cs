@@ -3,6 +3,7 @@ using System;
 using FluxoMedicoTesteNeoApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FluxoMedicoTesteNeoApp.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    partial class BancoContextModelSnapshot : ModelSnapshot
+    [Migration("20231209135621_CriandoTabelasMedicosPacientes")]
+    partial class CriandoTabelasMedicosPacientes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,15 +102,10 @@ namespace FluxoMedicoTesteNeoApp.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("PacienteId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Perfil")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PacienteId");
 
                     b.ToTable("Medicos");
                 });
@@ -127,22 +125,9 @@ namespace FluxoMedicoTesteNeoApp.Migrations
                     b.Navigation("Paciente");
                 });
 
-            modelBuilder.Entity("FluxoMedicoTesteNeoApp.Models.MedicoModel", b =>
-                {
-                    b.HasOne("FluxoMedicoTesteNeoApp.Core.Models.PacienteModel", "Paciente")
-                        .WithMany("Medicos")
-                        .HasForeignKey("PacienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Paciente");
-                });
-
             modelBuilder.Entity("FluxoMedicoTesteNeoApp.Core.Models.PacienteModel", b =>
                 {
                     b.Navigation("Consultas");
-
-                    b.Navigation("Medicos");
                 });
 
             modelBuilder.Entity("FluxoMedicoTesteNeoApp.Models.MedicoModel", b =>

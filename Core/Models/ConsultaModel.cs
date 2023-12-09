@@ -7,24 +7,30 @@ namespace FluxoMedicoTesteNeoApp.Models
     {
         public int Id { get; set; }
 
-        public string Nome { get; set; }
-
+        public PacienteModel Paciente { get; set; }
+        public MedicoModel Medico {  get; set; }
         public string Cpf { get; set; }
-       // public List<PacienteModel> pacientes { get; set; }
+       
+        public int? PacienteId { get; set; }
+
+        public int? MedicoId { get; set; }
+
         public string Diagnostico { get; set; }
         public DateTime? DataConsulta { get; set; }
 
         public ConsultaMedicaDto Consulta() { 
             ConsultaMedicaDto consulta = new ConsultaMedicaDto();
-            consulta.Cpf = Cpf;
+            consulta.CpfPaciente = Paciente.Cpf;
             consulta.Diagnostico = Diagnostico;
-            consulta.Nome = Nome;
+            consulta.NomePaciente = Paciente.Nome;
+            consulta.NomeMedico = Medico.Nome;
             return consulta;
         }
 
         public ConsultaModel (ConsultaMedicaDto consultaMedicaDto) {
-            Nome = consultaMedicaDto.Nome;
-            Cpf = consultaMedicaDto.Cpf;
+            Paciente.Nome = consultaMedicaDto.NomePaciente;
+            Paciente.Cpf = consultaMedicaDto.CpfPaciente;
+            Medico.Nome = consultaMedicaDto.NomeMedico;
             Diagnostico = consultaMedicaDto.Diagnostico;
             DataConsulta = DateTime.UtcNow;
         }

@@ -45,5 +45,23 @@ namespace FluxoMedicoTesteNeoApp.Controllers
             var consultaModel = await _consultaMedicaRepository.Salvar(consultaMedicaDto);
             return consultaModel != null ? Ok(consultaModel.Consulta()) : NotFound("Ouve erro na Cadastramento da Consulta");
         }
+        
+        /*
+        [HttpPut("/atualizarConsulta/{id}")]
+        public async Task<IActionResult> AtualizarConsulta(int id,ConsultaMedicaAtualizarDto atualizarDto)
+        {
+            if  <= 0) return BadRequest("Consulta não encontrada");
+
+            var consultas = await _consultaMedicaRepository.ConsultaMedicasById(id);
+
+            if (consultas == null) return NotFound("Consulta não encontrada na base de dados");
+
+            var consultaAtualizar = _mapper.Map(consultas, atualizarDto);
+
+            var consultaAtualizada = await _consultaMedicaRepository.AlterarConsulta(consultaAtualizar, id);
+
+            return consultaAtualizada != null ? Ok("Consulta atualizada com sucesso") : BadRequest("Erro ao atualizar consulta");
+        }
+        */
     }
 }

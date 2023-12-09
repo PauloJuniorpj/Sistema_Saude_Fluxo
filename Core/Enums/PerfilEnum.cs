@@ -4,6 +4,5 @@
     {
         Paciente = 1,
         Medico = 2,
-        Emfermeiro = 3,
     }
 }
