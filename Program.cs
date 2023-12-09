@@ -10,12 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<BancoContext>
     (banco => banco.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")));
 
+//Configuração do Mapper
 builder.Services.AddAutoMapper(typeof(StartupBase));
 
 builder.Services.AddControllers();
 
 //Constrole de scopo das repositorys
 builder.Services.AddScoped<IConsultaMedicaRepository, ConsultaMedicaRepository>();
+builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

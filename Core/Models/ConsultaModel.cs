@@ -10,6 +10,8 @@ namespace FluxoMedicoTesteNeoApp.Models
         public PacienteModel Paciente { get; set; }
         public MedicoModel Medico {  get; set; }
         public string Cpf { get; set; }
+
+        public string Nome { get; set; }
        
         public int? PacienteId { get; set; }
 

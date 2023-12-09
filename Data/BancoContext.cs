@@ -16,6 +16,8 @@ namespace FluxoMedicoTesteNeoApp.Data
 
         public DbSet<PacienteModel> Pacientes { get; set;}
 
+        public DbSet<MedicosPacientes>  medicosPacientes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {   
             //Config de relacionamentos de Consultas com Medicos e Pacientes 

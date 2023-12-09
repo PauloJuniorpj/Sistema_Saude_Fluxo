@@ -9,11 +9,10 @@ namespace FluxoMedicoTesteNeoApp.Models
         public string Nome { get; set; }
         
         public string Especialidade { get; set; }
-        public PerfilEnum Perfil { get; set; }
-        
-        public int PacienteId { get; set; }
 
-        public PacienteModel Paciente {  get; set; } 
+        public PerfilEnum Perfil { get; set; }
+       
+        public List<PacienteModel> Pacientes {  get; set; } 
 
         public virtual List<ConsultaModel> Consultas { get; set; }
 
