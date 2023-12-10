@@ -1,15 +1,53 @@
 ﻿using FluxoMedicoTesteNeoApp.Core.Dtos;
-using Microsoft.AspNetCore.Http;
+using FluxoMedicoTesteNeoApp.Core.Models;
+using FluxoMedicoTesteNeoApp.Core.Repository;
+using FluxoMedicoTesteNeoApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FluxoMedicoTesteNeoApp.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
+
     public class MedicoControlle : ControllerBase
-    {   
-        [HttpPost("/cadastrarMedico")]
-        public async Task<IActionResult> CriarConsulta(ConsultaMedicaDto consultaMedicaDto)
+    {
+        private readonly IMedicoRepository _medicoRepository;
+
+        public MedicoControlle(MedicoRepository medicicoRepository)
         {
-            return null;
+            _medicoRepository = medicicoRepository;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConsultaMedicos()
+        {
+            IEnumerable<MedicoModel> medicos = await _medicoRepository.ConsultarMedico();
+            return Ok(medicos);
+        }
+
+        [HttpGet("/buscarPorId")]
+        public async Task<IActionResult> ConsultarMedicoById(int id)
+        {
+            if (id <= 0) return BadRequest("Consulta não encontrada");
+           var medico = await _medicoRepository.BuscarMedicoById(id);
+
+            return medico != null ? Ok(medico) : NotFound("Medico não encontrado na base de dados");
+        }
+
+        [HttpPost("/cadastrarMedico")]
+        public async Task<IActionResult> CadastrarMedico(MedicoDto medicoDto)
+        {
+            if (medicoDto == null) return BadRequest("Dados invalidos");
+            var medico = await _medicoRepository.Salvar(medicoDto);
+            return medico != null ? Ok("Cadastrado com sucesso ") : NotFound("Ouve um erro no Cadastro do Medico");
+
+        }
+        [HttpDelete("/excluirMedico")]
+        public async Task<IActionResult> ExluirMedico(int id)
+        {
+          
+            var medico = await _medicoRepository.ExcluirMedico(id);
+            return medico != false ? Ok("Paciente excluido com sucesso") : NotFound("não tem esse paciente na base de dados");
         }
 
     }
