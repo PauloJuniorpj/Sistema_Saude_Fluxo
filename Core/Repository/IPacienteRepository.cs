@@ -11,5 +11,6 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
         Task<PacienteModel> Salvar(PacienteDto pacienteDto);
 
         Task<bool> ExluirPaciente(int id);
+        Task<PacienteModel> AlterarPacientes(PacienteAtualizadoDto pacienteAtualizadoDto);
     }
 }

@@ -6,10 +6,6 @@ namespace FluxoMedicoTesteNeoApp.Core.Models
 {
     public class PacienteModel
     {
-        private PacienteDto pacienteDto;
-
-       
-
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
@@ -23,6 +19,10 @@ namespace FluxoMedicoTesteNeoApp.Core.Models
 
         public PerfilEnum Perfil { get; set; }
 
+        //public UsuarioModel UsuarioPaciente { get; set; }
+
+        //public int? IdUsuarioPaciente { get; set; }
+
         public PacienteModel(PacienteDto pacienteDto)
         {
             Nome = pacienteDto.Nome;
@@ -34,6 +34,13 @@ namespace FluxoMedicoTesteNeoApp.Core.Models
         public PacienteModel()
         {
 
+        }
+
+        public PacienteModel(PacienteAtualizadoDto pacienteAtualizadoDto)
+        {
+            Nome = pacienteAtualizadoDto.Nome;
+            Cpf = pacienteAtualizadoDto.Cpf;
+            Idade = pacienteAtualizadoDto.Idade;
         }
     }
 }

@@ -16,9 +16,10 @@ builder.Services.AddAutoMapper(typeof(StartupBase));
 builder.Services.AddControllers();
 
 //Constrole de scopo das repositorys
+
+builder.Services.AddScoped<IMedicoRepository,MedicoRepository>();
+builder.Services.AddScoped<IPacienteRepository,PacienteRepository>();
 builder.Services.AddScoped<IConsultaMedicaRepository, ConsultaMedicaRepository>();
-builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
-builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

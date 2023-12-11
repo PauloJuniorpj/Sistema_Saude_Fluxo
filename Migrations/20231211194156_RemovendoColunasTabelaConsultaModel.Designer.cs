@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FluxoMedicoTesteNeoApp.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20231210143911_AdcionandoCampoDatasPacienteMedico")]
-    partial class AdcionandoCampoDatasPacienteMedico
+    [Migration("20231211194156_RemovendoColunasTabelaConsultaModel")]
+    partial class RemovendoColunasTabelaConsultaModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,9 @@ namespace FluxoMedicoTesteNeoApp.Migrations
                     b.Property<DateTime?>("DataCadastroPaciente")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("IdUsuarioPaciente")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Idade")
                         .HasColumnType("integer");
 
@@ -69,7 +72,31 @@ namespace FluxoMedicoTesteNeoApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdUsuarioPaciente")
+                        .IsUnique();
+
                     b.ToTable("Pacientes");
+                });
+
+            modelBuilder.Entity("FluxoMedicoTesteNeoApp.Core.Models.UsuarioModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("FluxoMedicoTesteNeoApp.Models.ConsultaModel", b =>
@@ -80,10 +107,6 @@ namespace FluxoMedicoTesteNeoApp.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime?>("DataConsulta")
                         .HasColumnType("timestamp with time zone");
 
@@ -93,10 +116,6 @@ namespace FluxoMedicoTesteNeoApp.Migrations
 
                     b.Property<int?>("MedicoId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<int?>("PacienteId")
                         .HasColumnType("integer");
@@ -125,6 +144,9 @@ namespace FluxoMedicoTesteNeoApp.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("IdUsuarioMedico")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text");
@@ -133,6 +155,9 @@ namespace FluxoMedicoTesteNeoApp.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdUsuarioMedico")
+                        .IsUnique();
 
                     b.ToTable("Medicos");
                 });
@@ -156,6 +181,17 @@ namespace FluxoMedicoTesteNeoApp.Migrations
                     b.Navigation("Paciente");
                 });
 
+            modelBuilder.Entity("FluxoMedicoTesteNeoApp.Core.Models.PacienteModel", b =>
+                {
+                    b.HasOne("FluxoMedicoTesteNeoApp.Core.Models.UsuarioModel", "UsuarioPaciente")
+                        .WithOne("PacienteUsuario")
+                        .HasForeignKey("FluxoMedicoTesteNeoApp.Core.Models.PacienteModel", "IdUsuarioPaciente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UsuarioPaciente");
+                });
+
             modelBuilder.Entity("FluxoMedicoTesteNeoApp.Models.ConsultaModel", b =>
                 {
                     b.HasOne("FluxoMedicoTesteNeoApp.Models.MedicoModel", "Medico")
@@ -171,9 +207,29 @@ namespace FluxoMedicoTesteNeoApp.Migrations
                     b.Navigation("Paciente");
                 });
 
+            modelBuilder.Entity("FluxoMedicoTesteNeoApp.Models.MedicoModel", b =>
+                {
+                    b.HasOne("FluxoMedicoTesteNeoApp.Core.Models.UsuarioModel", "UsuarioMedico")
+                        .WithOne("MedicoUsuario")
+                        .HasForeignKey("FluxoMedicoTesteNeoApp.Models.MedicoModel", "IdUsuarioMedico")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UsuarioMedico");
+                });
+
             modelBuilder.Entity("FluxoMedicoTesteNeoApp.Core.Models.PacienteModel", b =>
                 {
                     b.Navigation("Consultas");
+                });
+
+            modelBuilder.Entity("FluxoMedicoTesteNeoApp.Core.Models.UsuarioModel", b =>
+                {
+                    b.Navigation("MedicoUsuario")
+                        .IsRequired();
+
+                    b.Navigation("PacienteUsuario")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FluxoMedicoTesteNeoApp.Models.MedicoModel", b =>

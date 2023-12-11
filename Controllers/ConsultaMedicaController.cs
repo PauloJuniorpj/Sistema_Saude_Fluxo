@@ -13,11 +13,16 @@ namespace FluxoMedicoTesteNeoApp.Controllers
     public class ConsultaMedicaController : ControllerBase
     {
         private readonly IConsultaMedicaRepository _consultaMedicaRepository;
+        private readonly IMedicoRepository _medicoRepository;
+        private readonly IPacienteRepository _pacienteRepository;
         private readonly IMapper _mapper;
-        public ConsultaMedicaController(IConsultaMedicaRepository consultaMedicaRepository, IMapper mapper)
+        public ConsultaMedicaController(IConsultaMedicaRepository consultaMedicaRepository, IMapper mapper, 
+            IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository)
         {   
             _mapper = mapper;
             _consultaMedicaRepository = consultaMedicaRepository;
+            _medicoRepository = medicoRepository;
+            _pacienteRepository = pacienteRepository;
         }
 
         [HttpGet]
@@ -39,11 +44,18 @@ namespace FluxoMedicoTesteNeoApp.Controllers
         }
 
         [HttpPost("/cadastrarConsulta")]
-        public async Task<IActionResult> CriarConsulta(ConsultaMedicaDto consultaMedicaDto)
+        public async Task<IActionResult> CriarConsulta(int idPaciente, int idMedico, ConsultaMedicaDto consultaMedicaDto)
         {
+            if (idPaciente <= 0 && idMedico <= 0) return BadRequest("Medico é Paciente não encontrado na base de dados");
+
+            _ = await _pacienteRepository.BuscarPacienteById(idPaciente);
+
+           _ = await _medicoRepository.BuscarMedicoById(idMedico);
+
             if (consultaMedicaDto == null) return BadRequest("Dados Invalidos");
             var consultaModel = await _consultaMedicaRepository.Salvar(consultaMedicaDto);
-            return consultaModel != null ? Ok(consultaModel.Consulta()) : NotFound("Ouve erro na Cadastramento da Consulta");
+
+            return consultaModel != null ? Ok(consultaModel) : NotFound("Ouve erro na Cadastramento da Consulta");
         }
         
        
@@ -61,7 +73,7 @@ namespace FluxoMedicoTesteNeoApp.Controllers
             return consultaAtualizada != null ? Ok("Consulta atualizada com sucesso") : NotFound("Erro ao atualizar consulta");
         }
 
-        [HttpDelete("/excluirConsulta")]
+        [HttpDelete("/excluirConsulta/{id}")]
         public async Task<IActionResult> ExluirConsulta(int id)
         {
             if (id <= 0) return BadRequest("Consulta não encontrada");

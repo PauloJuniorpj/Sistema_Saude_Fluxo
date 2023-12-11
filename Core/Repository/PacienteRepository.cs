@@ -1,6 +1,7 @@
 ﻿using FluxoMedicoTesteNeoApp.Core.Dtos;
 using FluxoMedicoTesteNeoApp.Core.Models;
 using FluxoMedicoTesteNeoApp.Data;
+using FluxoMedicoTesteNeoApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FluxoMedicoTesteNeoApp.Core.Repository
@@ -52,6 +53,18 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             _bancoContext.SaveChanges();
 
             return true;
+        }
+
+        public async Task<PacienteModel> AlterarPacientes(PacienteAtualizadoDto pacienteAtualizadoDto)
+        {
+            var paciente = new PacienteModel(pacienteAtualizadoDto);
+            if (paciente == null)
+            {
+                throw new System.Exception("Houve um erro na atualozação da consulta!");
+            }
+            _bancoContext.Pacientes.Update(paciente);
+            await _bancoContext.SaveChangesAsync();
+            return paciente;
         }
     }
 }

@@ -47,7 +47,7 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             return consultaAtualizada;
         }
 
-        public async Task<bool> ExcluirMedico(int id)
+        public async Task<bool> ExluirConsulta(int id)
         {
             ConsultaModel consulta = await ConsultaMedicasById(id);
             if (consulta == null)

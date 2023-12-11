@@ -25,7 +25,7 @@ namespace FluxoMedicoTesteNeoApp.Controllers
             return Ok(medicos);
         }
 
-        [HttpGet("/buscarPorId")]
+        [HttpGet("/buscarMedicoPorId/{id}")]
         public async Task<IActionResult> ConsultarMedicoById(int id)
         {
             if (id <= 0) return BadRequest("Consulta não encontrada");
@@ -43,8 +43,8 @@ namespace FluxoMedicoTesteNeoApp.Controllers
 
         }
 
-        [HttpPut("/atualizarConsulta/{id}")]
-        public async Task<IActionResult> AtualizarConsulta(int id, MedicoAtualizadoDto medicoAtualizado)
+        [HttpPut("/atualizarMedico/{id}")]
+        public async Task<IActionResult> AtualizarMedico(int id, MedicoAtualizadoDto medicoAtualizado)
         {
             if (id <= 0) return BadRequest("Consulta não encontrada");
 
@@ -57,8 +57,8 @@ namespace FluxoMedicoTesteNeoApp.Controllers
             return cadastroMedicoAtualizado != null ? Ok("Cadastro atualizado com sucesso") : NotFound("Erro ao atualizar consulta");
         }
 
-        [HttpDelete("/excluirPaciente")]
-        public async Task<IActionResult> ExluirPaciente(int id)
+        [HttpDelete("/excluirMedico/{id}")]
+        public async Task<IActionResult> ExluirMedico(int id)
         {
             if (id <= 0) return BadRequest("Consulta não encontrada");
 

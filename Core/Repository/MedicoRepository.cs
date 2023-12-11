@@ -32,7 +32,7 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
         {
             if (medicoDto == null)
             {
-                throw new SystemException("Houve um erro nas informações do Paciente");
+                throw new SystemException("Houve um erro nas informações do Medico");
             }
             MedicoModel medico = new MedicoModel(medicoDto);
             medico.Perfil = Enums.PerfilEnum.Medico;

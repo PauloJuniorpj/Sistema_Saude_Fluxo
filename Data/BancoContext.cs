@@ -18,6 +18,8 @@ namespace FluxoMedicoTesteNeoApp.Data
 
         public DbSet<MedicosPacientes>  medicosPacientes { get; set; }
 
+        //public DbSet<UsuarioModel> Usuarios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {   
             //Config de relacionamentos de Consultas com Medicos e Pacientes 
@@ -25,6 +27,9 @@ namespace FluxoMedicoTesteNeoApp.Data
 
             //Config de relacionamentos de Medicos com pacientes 
             modelBuilder.ApplyConfiguration(new MedicoMap());
+
+            //Config de relacionamentos Um pra UM de usuario
+           // modelBuilder.ApplyConfiguration(new UsuarioMap());
 
             base.OnModelCreating(modelBuilder);
         }

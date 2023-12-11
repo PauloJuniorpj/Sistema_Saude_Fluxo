@@ -8,16 +8,20 @@ namespace FluxoMedicoTesteNeoApp.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        
+
         public string Especialidade { get; set; }
 
         public DateTime? DataCadastroMedico { get; set; }
 
         public PerfilEnum Perfil { get; set; }
-       
-        public List<PacienteModel> Pacientes {  get; set; } 
+
+        public List<PacienteModel> Pacientes { get; set; }
 
         public virtual List<ConsultaModel> Consultas { get; set; }
+
+        //public UsuarioModel UsuarioMedico { get; set; }
+
+        //public int? IdUsuarioMedico { get; set; }
 
         public MedicoModel(MedicoDto medicoDto)
         {
