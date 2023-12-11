@@ -5,6 +5,7 @@ namespace FluxoMedicoTesteNeoApp.Models
 {
     public class ConsultaModel
     {
+      
         public int Id { get; set; }
 
         public PacienteModel Paciente { get; set; }
@@ -38,5 +39,13 @@ namespace FluxoMedicoTesteNeoApp.Models
         }
 
         public ConsultaModel(){ }
+
+        public ConsultaModel(ConsultaMedicaAtualizarDto consultaMedicaAtualizar)
+        {
+            Paciente.Nome = consultaMedicaAtualizar.NomePaciente;
+            Paciente.Cpf = consultaMedicaAtualizar.CpfPaciente;
+            Medico.Nome = consultaMedicaAtualizar.NomeMedico;
+            Diagnostico = consultaMedicaAtualizar.Diagnostico;
+        }
     }
 }

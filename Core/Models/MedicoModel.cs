@@ -26,6 +26,13 @@ namespace FluxoMedicoTesteNeoApp.Models
             DataCadastroMedico = DateTime.UtcNow;
         }
 
+        public MedicoModel(MedicoAtualizadoDto medicoAtualizado)
+        {
+            Nome = medicoAtualizado.Nome;
+            Especialidade = medicoAtualizado.Especialidade;
+        }
+
+
         public MedicoModel()
         {
 

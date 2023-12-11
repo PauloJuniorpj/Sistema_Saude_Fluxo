@@ -41,7 +41,7 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             return medico;
         }
 
-        public async Task<bool> ExluirMedico(int id)
+        public async Task<bool> ExcluirMedico(int id)
         {
             MedicoModel medico = await BuscarMedicoById(id);
             if (medico == null)
@@ -53,6 +53,19 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             _bancoContext.SaveChanges();
 
             return true;
+        }
+
+
+        public async Task<MedicoModel> AlterarDadosMedico(MedicoAtualizadoDto  medicoAtualizadoDto)
+        {
+            if (medicoAtualizadoDto == null)
+            {
+                throw new SystemException("Houve um erro nas informações do Paciente");
+            }
+            MedicoModel medico = new MedicoModel(medicoAtualizadoDto);
+             _bancoContext.Medicos.Update(medico);
+            await _bancoContext.SaveChangesAsync();
+            return medico;
         }
     }
 }

@@ -36,16 +36,29 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             return model;
         }
 
-        public async Task<ConsultaModel> AlterarConsulta(int id, ConsultaMedicaAtualizarDto consultaMedicaAtualizar)
+        public async Task<ConsultaModel> AlterarConsulta(ConsultaMedicaAtualizarDto consultaMedicaAtualizar)
         {
-            var consultaAtualizada = await ConsultaMedicasById(id);
-            
+            var consultaAtualizada = new ConsultaModel(consultaMedicaAtualizar); 
             if(consultaAtualizada == null)  {
                 throw new System.Exception("Houve um erro na atualozação da consulta!");
             }
             _bancoContext.ConsultasMedicas.Update(consultaAtualizada);
             await _bancoContext.SaveChangesAsync();
             return consultaAtualizada;
+        }
+
+        public async Task<bool> ExcluirMedico(int id)
+        {
+            ConsultaModel consulta = await ConsultaMedicasById(id);
+            if (consulta == null)
+            {
+                throw new System.Exception("Houve um erro na exlusao do usuário");
+            }
+
+            _bancoContext.ConsultasMedicas.Remove(consulta);
+            _bancoContext.SaveChanges();
+
+            return true;
         }
     }
 }

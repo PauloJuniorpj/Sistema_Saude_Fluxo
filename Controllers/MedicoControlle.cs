@@ -42,10 +42,26 @@ namespace FluxoMedicoTesteNeoApp.Controllers
             return medico != null ? Ok("Cadastrado com sucesso ") : NotFound("Ouve um erro no Cadastro do Medico");
 
         }
-        [HttpDelete("/excluirMedico")]
-        public async Task<IActionResult> ExluirMedico(int id)
+
+        [HttpPut("/atualizarConsulta/{id}")]
+        public async Task<IActionResult> AtualizarConsulta(int id, MedicoAtualizadoDto medicoAtualizado)
         {
-          
+            if (id <= 0) return BadRequest("Consulta não encontrada");
+
+            var medico = await _medicoRepository.BuscarMedicoById(id);
+
+            if (medico == null) return NotFound("Consulta não encontrada na base de dados");
+
+            var cadastroMedicoAtualizado = await _medicoRepository.AlterarDadosMedico(medicoAtualizado);
+
+            return cadastroMedicoAtualizado != null ? Ok("Cadastro atualizado com sucesso") : NotFound("Erro ao atualizar consulta");
+        }
+
+        [HttpDelete("/excluirPaciente")]
+        public async Task<IActionResult> ExluirPaciente(int id)
+        {
+            if (id <= 0) return BadRequest("Consulta não encontrada");
+
             var medico = await _medicoRepository.ExcluirMedico(id);
             return medico != false ? Ok("Paciente excluido com sucesso") : NotFound("não tem esse paciente na base de dados");
         }

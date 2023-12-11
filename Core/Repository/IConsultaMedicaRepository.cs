@@ -10,6 +10,7 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
         Task<ConsultaModel> ConsultaMedicasById(int id);
         Task<ConsultaModel> Salvar(ConsultaMedicaDto consulta);
 
-        Task<ConsultaModel> AlterarConsulta(int id, ConsultaMedicaAtualizarDto consultaMedicaAtualizar);
+        Task<ConsultaModel> AlterarConsulta(ConsultaMedicaAtualizarDto consultaMedicaAtualizar);
+        Task<bool> ExluirConsulta(int id);
     }
 }

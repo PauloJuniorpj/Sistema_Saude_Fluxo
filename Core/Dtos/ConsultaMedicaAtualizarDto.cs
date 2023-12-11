@@ -4,9 +4,11 @@
     {
         public int Id { get; set; }
 
-        public string Nome { get; set; }
+        public string NomePaciente { get; set; }
 
-        public string Cpf { get; set; }
+        public string CpfPaciente { get; set; }
+
+        public string NomeMedico { get; set; }
         // public List<PacienteModel> pacientes { get; set; }
         public string Diagnostico { get; set; }
        
