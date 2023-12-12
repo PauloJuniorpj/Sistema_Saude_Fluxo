@@ -12,5 +12,7 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
 
         Task<ConsultaModel> AlterarConsulta(ConsultaMedicaAtualizarDto consultaMedicaAtualizar);
         Task<bool> ExluirConsulta(int id);
+
+        Task<IEnumerable<ConsultaModel>> BuscarConsultasComDapper();
     }
 }
