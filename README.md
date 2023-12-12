@@ -1,13 +1,26 @@
 # Sistema_Saude_Fluxo
- *****Um projeto simulando um sistema medico de saúde com algumas operações*** 
+Projeto de Sistema Médico de Saúde utilizando Padrão MVC, REST com HTTP (GET, POST, PUT, DELETE), C# Orientado a Objetos, Entity Framework, Swagger e PostgreSQL
 
-•	Utilizando o Padrão MVC aplicando conceitos da arquitetura. Utilizando o REST junto dos verbos HTTP (GET, POST, PUT e DELETE), pra permitir a gravação de dados, leitura, atualização é exclusão de dados 
+Este projeto visa simular um sistema médico de saúde com operações CRUD (Create, Read, Update, Delete) implementadas seguindo as melhores práticas de arquitetura e boas práticas de programação em C#/.NET.
 
-•	Codificando utilizando o C# Orientado Objeto, aplicando os conceitos do Entity framework
+Arquitetura e Padrões:
+Implementação do Padrão MVC (Model-View-Controller) para organizar a estrutura do projeto, separando responsabilidades entre modelos, visualizações e controladores.
+Utilização do RESTful API com os verbos HTTP (GET, POST, PUT e DELETE) para permitir a interação com os dados.
 
-•	Utilização do Swagger pra facilitar na Documentação da API , utilização do banco PostgreSQL como ferramenta de armazenamento de dados
+Programação Orientada a Objetos e Entity Framework:
+Desenvolvimento em C# Orientado a Objetos para garantir a modularidade e reusabilidade do código.
+Utilização do Entity Framework para facilitar a interação com o banco de dados PostgreSQL, aproveitando as capacidades de mapeamento objeto-relacional e simplificando as operações de banco de dados.
 
-•	API foi projetada com escalabilidade, pra ter espaço de crescimento assim como meus conhecimentos em C#/.NET vai sendo aprimorado a API vai crescendo 
+Documentação da API com Swagger:
+Integração do Swagger para documentação da API, proporcionando uma interface amigável e detalhada para facilitar a compreensão das operações disponíveis, parâmetros necessários e exemplos de uso.
+
+Armazenamento de Dados:
+Utilização do banco de dados PostgreSQL para armazenar os dados do sistema médico de saúde. O PostgreSQL foi escolhido pela sua robustez, desempenho e suporte a tipos de dados complexos, atendendo às necessidades do projeto.
+Escalabilidade:
+
+O projeto foi desenhado com escalabilidade em mente, permitindo o crescimento contínuo à medida que os conhecimentos em C#/.NET são aprimorados. A estrutura modular e o uso de padrões de projeto possibilitam a fácil adição de novas funcionalidades e a adaptação a requisitos futuros.
+Este projeto não apenas demonstra minhas habilidades técnicas em C# e .NET, mas também reflete a atenção aos princípios de design de software que eu tenho estudado, boas práticas de programação e o foco na escalabilidade para atender às demandas futuras do sistema médico de saúde que estou desenvolvendo.
+
 
                             *----PROJETO EM EVOLUÇÃO----*
 
