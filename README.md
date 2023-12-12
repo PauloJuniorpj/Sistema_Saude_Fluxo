@@ -18,7 +18,7 @@ Armazenamento de Dados:
 Utilização do banco de dados PostgreSQL para armazenar os dados do sistema médico de saúde. O PostgreSQL foi escolhido pela sua robustez, desempenho e suporte a tipos de dados complexos, atendendo às necessidades do projeto.
 Escalabilidade:
 
-O projeto foi desenhado com escalabilidade em mente, permitindo o crescimento contínuo à medida que os conhecimentos em C#/.NET são aprimorados. A estrutura modular e o uso de padrões de projeto possibilitam a fácil adição de novas funcionalidades e a adaptação a requisitos futuros.
+O projeto foi desenhado com escalabilidade em mente, permitindo o crescimento contínuo à medida que os meus conhecimentos em C#/.NET são aprimorados. A estrutura modular e o uso de padrões de projeto possibilitam a fácil adição de novas funcionalidades e a adaptação a requisitos futuros.
 Este projeto não apenas demonstra minhas habilidades técnicas em C# e .NET, mas também reflete a atenção aos princípios de design de software que eu tenho estudado, boas práticas de programação e o foco na escalabilidade para atender às demandas futuras do sistema médico de saúde que estou desenvolvendo.
 
 
