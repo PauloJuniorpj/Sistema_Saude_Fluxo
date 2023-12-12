@@ -9,7 +9,6 @@
 
 •	API foi projetada com escalabilidade, pra ter espaço de crescimento assim como meus conhecimentos em C#/.NET vai sendo aprimorado a API vai crescendo 
 
-
                             *----PROJETO EM EVOLUÇÃO----*
 
   
