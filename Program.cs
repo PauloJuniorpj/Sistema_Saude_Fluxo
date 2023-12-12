@@ -1,6 +1,7 @@
 using FluxoMedicoTesteNeoApp.Core.Repository;
 using FluxoMedicoTesteNeoApp.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<BancoContext>
 builder.Services.AddAutoMapper(typeof(StartupBase));
 
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
 //Constrole de scopo das repositorys
 

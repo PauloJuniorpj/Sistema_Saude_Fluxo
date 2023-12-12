@@ -1,4 +1,5 @@
 ﻿using FluxoMedicoTesteNeoApp.Core.Dtos;
+using FluxoMedicoTesteNeoApp.Core.Models;
 using FluxoMedicoTesteNeoApp.Data;
 using FluxoMedicoTesteNeoApp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,12 +8,16 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
 {
     public class ConsultaMedicaRepository : IConsultaMedicaRepository
     {
-
+        private readonly IPacienteRepository _pacienteRepository;
+        private readonly IMedicoRepository _medicoRepository;
         private readonly BancoContext _bancoContext;
 
-        public ConsultaMedicaRepository(BancoContext bancoContext)
+        public ConsultaMedicaRepository(BancoContext bancoContext, 
+            IPacienteRepository pacienteRepository, IMedicoRepository medicoRepository)
         {
             _bancoContext = bancoContext;
+            _pacienteRepository = pacienteRepository;
+            _medicoRepository = medicoRepository;
         }
 
         public async Task<IEnumerable<ConsultaModel>> ConsultaMedicas()
@@ -29,10 +34,24 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
 
         //Methodo de salvar CREATE
         public async Task<ConsultaModel> Salvar(ConsultaMedicaDto consulta)
-        {
+        {   
             ConsultaModel model = new ConsultaModel(consulta);
-           await _bancoContext.ConsultasMedicas.AddAsync(model);
-            _bancoContext.SaveChanges();
+            var idPaciente = model.PacienteId; 
+            var idMedico  = model.MedicoId;
+            var medico = await _medicoRepository.BuscarMedicoById(idMedico);
+            var paciente = await _pacienteRepository.BuscarPacienteById(idPaciente);
+            model.Paciente = paciente; 
+            model.Medico = medico;
+
+            // Toda vez que ele cadastra uma consulta ele vai gravar o medico e o paciente na tabela composta
+            var medicopacientesSalvos = new MedicosPacientes();
+            medicopacientesSalvos.PacienteId = paciente.Id;
+            medicopacientesSalvos.MedicoId = medico.Id;
+            // Toda vez que ele cadastra uma consulta ele vai gravar o medico e o paciente na tabela composta
+
+            await _bancoContext.medicosPacientes.AddAsync(medicopacientesSalvos);
+            await _bancoContext.ConsultasMedicas.AddAsync(model);
+            await _bancoContext.SaveChangesAsync();
             return model;
         }
 

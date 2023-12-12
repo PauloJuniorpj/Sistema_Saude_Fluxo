@@ -18,6 +18,8 @@ namespace FluxoMedicoTesteNeoApp.Models
         public DateTime? DataConsulta { get; set; }
 
         public ConsultaModel (ConsultaMedicaDto consultaMedicaDto) {
+            MedicoId = consultaMedicaDto.IdMedico;
+            PacienteId = consultaMedicaDto.IdPaciente;
             Diagnostico = consultaMedicaDto.diagnostico;
             DataConsulta = DateTime.UtcNow;
         }

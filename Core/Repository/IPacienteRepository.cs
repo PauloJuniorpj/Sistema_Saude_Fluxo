@@ -6,11 +6,12 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
 {
     public interface IPacienteRepository
     {
-        Task<PacienteModel> BuscarPacienteById(int id);
+        Task<PacienteModel> BuscarPacienteById(int? id);
         Task<IEnumerable<PacienteModel>> ConsultaPacientes();
         Task<PacienteModel> Salvar(PacienteDto pacienteDto);
 
         Task<bool> ExluirPaciente(int id);
         Task<PacienteModel> AlterarPacientes(PacienteAtualizadoDto pacienteAtualizadoDto);
+        
     }
 }

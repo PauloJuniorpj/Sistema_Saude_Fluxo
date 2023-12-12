@@ -13,16 +13,12 @@ namespace FluxoMedicoTesteNeoApp.Controllers
     public class ConsultaMedicaController : ControllerBase
     {
         private readonly IConsultaMedicaRepository _consultaMedicaRepository;
-        private readonly IMedicoRepository _medicoRepository;
-        private readonly IPacienteRepository _pacienteRepository;
-        private readonly IMapper _mapper;
-        public ConsultaMedicaController(IConsultaMedicaRepository consultaMedicaRepository, IMapper mapper, 
-            IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository)
+        
+        public ConsultaMedicaController(IConsultaMedicaRepository consultaMedicaRepository)
         {   
-            _mapper = mapper;
+
             _consultaMedicaRepository = consultaMedicaRepository;
-            _medicoRepository = medicoRepository;
-            _pacienteRepository = pacienteRepository;
+           
         }
 
         [HttpGet]
@@ -44,13 +40,8 @@ namespace FluxoMedicoTesteNeoApp.Controllers
         }
 
         [HttpPost("/cadastrarConsulta")]
-        public async Task<IActionResult> CriarConsulta(int idPaciente, int idMedico, ConsultaMedicaDto consultaMedicaDto)
+        public async Task<IActionResult> CriarConsulta(ConsultaMedicaDto consultaMedicaDto)
         {
-            if (idPaciente <= 0 && idMedico <= 0) return BadRequest("Medico é Paciente não encontrado na base de dados");
-
-            _ = await _pacienteRepository.BuscarPacienteById(idPaciente);
-
-           _ = await _medicoRepository.BuscarMedicoById(idMedico);
 
             if (consultaMedicaDto == null) return BadRequest("Dados Invalidos");
             var consultaModel = await _consultaMedicaRepository.Salvar(consultaMedicaDto);

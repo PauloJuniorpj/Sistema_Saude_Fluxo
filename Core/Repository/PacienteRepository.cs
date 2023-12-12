@@ -13,7 +13,7 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             _bancoContext = bancoContext;
         }
 
-        public async Task<PacienteModel> BuscarPacienteById(int id)
+        public async Task<PacienteModel> BuscarPacienteById(int? id)
         {   
             if(id == null)
             {

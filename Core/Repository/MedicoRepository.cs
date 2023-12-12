@@ -18,7 +18,7 @@ namespace FluxoMedicoTesteNeoApp.Core.Repository
             return await _bancoContext.Medicos.ToListAsync();
         }
 
-        public async Task<MedicoModel> BuscarMedicoById(int id)
+        public async Task<MedicoModel> BuscarMedicoById(int? id)
         {
             if (id == null)
             {
